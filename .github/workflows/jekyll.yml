@@ -1,8 +1,8 @@
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: Deploy Jekyll with Custom Dependencies
 
 on:
   push:
-    branches: ["main"] # 如果你的主分支叫 master，请改为 master
+    branches: ["main"] # 如果你的默认分支是 master，请修改此处
 
 permissions:
   contents: read
@@ -19,17 +19,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+
       - name: Install ImageMagick
+        # 如果你的主题需要处理图片缩略图，这一步是必须的
         run: |
           sudo apt-get update
           sudo apt-get install -y imagemagick
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+
+      - name: Setup Ruby
+        # 这个动作会自动读取你项目中的 Gemfile 和 Gemfile.lock
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
+          ruby-version: '3.4.7' 
+          bundler-cache: true # 开启缓存，让后续推送构建速度更快
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Build with Jekyll
+        # 使用 bundle exec 确保强制使用你 Gemfile 里的 Jekyll 4 和现代 Sass
+        run: bundle exec jekyll build --destination ./_site
+        env:
+          JEKYLL_ENV: production
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
