@@ -1,0 +1,22 @@
+<!-- <div class="cover-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0;">
+  {% for item in include.datasource %}
+    <div class="cover-item">
+      <img src="{{ site.baseurl }}/assets/img/publication/cover/{{ item.image }}" style="width:100%; height:auto; border-radius: 4px;">
+    </div>
+  {% endfor %}
+</div> -->
+
+<div class="cover-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0;">
+  {% for item in include.datasource %}
+    <div class="cover-item">
+      <img src="{{ site.baseurl }}/assets/img/publication/cover/{{ item.image }}" 
+           alt="{{ item.title }}"
+           style="width: 100%; 
+                  aspect-ratio: 3 / 4; 
+                  object-fit: cover; 
+                  border-radius: 4px; 
+                  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                  display: block;">
+    </div>
+  {% endfor %}
+</div>

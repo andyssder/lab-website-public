@@ -1,0 +1,33 @@
+---
+layout: default 
+---
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-3 col-xs-12">
+            {% if page.profile_image %}
+                <img class="img-fluid z-depth-1 rounded" src="{{ site.baseurl }}/assets/img/{{ page.profile_image }}" alt="Profile Picture">
+            {% endif %}
+        </div>
+        
+        <div class="col-sm-9 col-xs-12">
+            <h2 class="title">{{ page.title }}</h2>
+            <ul class="list-unstyled">
+                <li>{{ page.institution_line_1 }}</li>
+                <li>{{ page.institution_line_2 }}</li>
+                <li>Email: <a href="mailto:{{ page.email }}">{{ page.email }}</a></li>
+                <li>Homepage: <a href="{{ page.homepage }}">{{ page.homepage }}</a></li>
+                <li>ResearchGate: <a href="{{ page.researchgate }}">{{ page.researchgate }}</a></li>
+                <li>Google Scholar: <a href="{{ page.google_scholar }}">{{ page.google_scholar }}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12">
+            {{ content }}
+        </div>
+    </div>
+</div>

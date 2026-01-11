@@ -1,0 +1,31 @@
+<div class="col-md-6 mb-3"> <div class="card member-card h-100 shadow-sm border">
+        <div class="row g-0 h-100">
+            <div class="col-4">
+                {% if include.member.image %}
+                <div class="h-100" style="width: 100%;">
+                    <img src="{{ site.baseurl }}/assets/img/group/{{ include.member.image }}" 
+                         alt="{{ include.member.name }}"
+                         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="col-8 d-flex align-items-center">
+                <div class="card-body p-2 px-3" style="margin-left: -18px;"> 
+                    <div class="card-text member-info-text">
+                        {{ include.member.content | markdownify }}
+                    </div>
+                    
+                    {% if include.member.email %}
+                    <p class="card-text email-text">
+                        <small class="text-muted">
+                            <i class="fas fa-envelope"></i> 
+                            <a href="mailto:{{ include.member.email }}" style="color: inherit; text-decoration: none;">{{ include.member.email }}</a>
+                        </small>
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<h2 style="text-align: center; font-weight: bold; color: #333; margin: 50px 0 20px;">Recent publications</h2>
+<div style="margin-bottom: 30px;">
+  <input type="text" id="recentSearch" onkeyup="searchFunc()" placeholder="🔍 Search by title, author, or journal..." 
+         style="width:100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 25px; outline: none; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);">
+</div>
+
+<ul id="recentList" style="list-style: none; padding: 0;">
+  {% for item in include.datasource %}
+  <li class="recent-item" style="margin-bottom: 25px; padding-left: 15px; border-left: 3px solid #eee; transition: 0.3s;">
+    <div style="line-height: 1.6;">
+      {{ item.authors | markdownify | remove: '<p>' | remove: '</p>' }}
+      <strong>{{ item.title }}</strong>. <br>
+      <span style="font-style: italic; color: #555;">{{ item.journal }}</span>. {{ item.year }}, {{ item.volume }}.
+      <a href="{{ item.doi_link }}" target="_blank" style="color: #0056b3; font-size: 0.9em; margin-left: 8px;">[DOI]</a>
+    </div>
+    <span class="hidden-search" style="display:none;">{{ item.title }} {{ item.authors }} {{ item.journal }} {{ item.year }}</span>
+  </li>
+  {% endfor %}
+</ul>

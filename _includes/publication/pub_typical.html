@@ -1,0 +1,25 @@
+<h2 style="text-align: center; font-weight: bold; color: #333; margin: 40px 0 20px;">Typical publications</h2>
+<table style="width: 100%; border-collapse: collapse; border-top: 2px solid #444;">
+  {% for item in include.datasource %}
+  <tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 20px 10px; color: #0056b3; font-weight: bold; width: 40px; font-size: 1.1em; vertical-align: top;">
+      {{ forloop.index }}.
+    </td>
+    <td style="padding: 20px 15px; vertical-align: top; line-height: 1.6;">
+      <div style="margin-bottom: 5px;">
+        {{ item.authors | markdownify | remove: '<p>' | remove: '</p>' }}
+      </div>
+      <div style="font-size: 1.05em; margin-bottom: 5px;">{{ item.title }}.</div>
+      <div style="color: #666;">
+        <span style="font-weight: bold; font-style: italic; color: #333;">{{ item.journal }}</span>, {{ item.year }}, {{ item.volume }}.
+        <a href="{{ item.doi_link }}" target="_blank" style="color: #d9534f; font-weight: bold; text-decoration: none; margin-left: 10px;">[Link]</a>
+      </div>
+    </td>
+    <td style="padding: 20px 0; width: 220px; text-align: right;">
+      {% if item.image %}
+      <img src="{{ site.baseurl }}/assets/img/publication/typical/{{ item.image }}" style="max-width: 200px; height: auto; border: 1px solid #eee; padding: 4px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);">
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>

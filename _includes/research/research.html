@@ -1,0 +1,58 @@
+<div class="research-container">
+  {% assign header_item = site.research | where: "type", "header" | first %}
+  {% if header_item %}
+  <section class="research-intro shadow-sm mb-5">
+    <div class="row no-gutters align-items-center">
+      <div class="col-lg-7 p-4 p-md-5">
+        <h2 class="header-title">Research Philosophy</h2>
+        <div class="header-body">{{ header_item.content | markdownify }}</div>
+      </div>
+      <div class="col-lg-5 p-4 text-center">
+        <img src="{{ header_item.image | relative_url }}" class="img-fluid rounded-lg shadow-sm" alt="Overview">
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <div class="research-list-wrapper">
+    {% assign projects = site.research | where: "type", "project" | sort: "order" | reverse %}
+    {% for project in projects %}
+    <div class="research-item-card shadow-sm">
+      <div class="item-header">
+        <h3 class="item-title">{{ project.title }}</h3>
+      </div>
+      <div class="item-body">
+        <div class="item-description">
+          {{ project.content | markdownify }}
+        </div>
+        <div class="item-image-box">
+          <img src="{{ project.image | relative_url }}" class="img-fluid rounded" alt="{{ project.title }}">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .research-container { padding: 20px 0; }
+  
+  /* 上半部分固定样式 */
+  .research-intro { background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); }
+  .header-title { color: #0076df; font-weight: 700; margin-bottom: 1.5rem; }
+  .header-body { font-size: 1.1rem; line-height: 1.8; color: #444; text-align: justify; }
+
+  /* 下半部分项目卡片 */
+  .research-item-card { background: #fff; border-radius: 12px; margin-bottom: 4rem; padding: 2.5rem; border: 1px solid rgba(0,0,0,0.08); }
+  /* 红色标题 */
+  .item-title { color: #d01010; font-weight: 700; font-size: 1.6rem; margin-bottom: 1.5rem; }
+  /* 蓝色正文 */
+  .item-description { font-size: 1.1rem; line-height: 1.8; color: #0056a3; text-align: justify; margin-bottom: 2rem; }
+  
+  .item-image-box { text-align: center; background: #fcfcfc; padding: 15px; border-radius: 8px; }
+  .item-image-box img { max-width: 95%; height: auto; border: 1px solid #f0f0f0; }
+
+  @media (max-width: 768px) {
+    .research-intro, .research-item-card { padding: 1.5rem; }
+  }
+</style>

@@ -1,0 +1,29 @@
+<div class="news-container" style="margin-top: 20px;">
+  {% assign news_by_year = include.datasource | group_by_exp: "item", "item.date | date: '%Y'" %}
+  
+  {% for year_group in news_by_year %}
+    <h2 style="color: #cc0000; font-weight: bold; margin-top: 35px; margin-bottom: 15px; font-size: 1.75rem;">
+      {{ year_group.name }}
+    </h2>
+    
+    <div class="news-list">
+      {% assign sorted_news = year_group.items | sort: 'date' | reverse %}
+      {% for item in sorted_news %}
+        <div style="display: flex; align-items: flex-start; margin-bottom: 12px; font-size: 1.05rem; line-height: 1.5;">
+          
+          <div style="min-width: 90px; font-weight: bold; flex-shrink: 0;">
+            {{ item.date | date: "%Y/%m" }}:
+          </div>
+          
+          <div style="color: #333;">
+            {{ item.content | markdownify | remove: '<p>' | remove: '</p>' }}
+            {% if item.link %}
+              <a href="{{ item.link }}" target="_blank" style="color: #0056b3; font-weight: bold; text-decoration: none; margin-left: 4px;">[Link]</a>
+            {% endif %}
+          </div>
+          
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
